@@ -5,10 +5,12 @@ const router = express.Router()
 const healthRouter = require('./health')
 const todoRouter = require('./todo')
 const userRouter = require('./users')
+const loginRouter = require('./login')
 
 /* Manejador de ruta general */
 router.use(healthRouter)
 router.use(todoRouter)
 router.use(userRouter)
+router.use(loginRouter)
 
 module.exports = router

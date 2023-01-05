@@ -1,6 +1,5 @@
 /* disable eslint */
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 
 /* Metodos para el llamado de las funciones */
 const todosController = require('../controllers/todosController')

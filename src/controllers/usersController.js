@@ -77,10 +77,7 @@ const updateUserController = async (req, res, next) => {
         .json(data)
         .end()
     })
-    .catch(err => {
-      console.log(err)
-      next(err)
-    })
+    .catch(err => next(err))
 }
 
 module.exports = {

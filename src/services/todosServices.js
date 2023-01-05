@@ -5,7 +5,14 @@ const getAllTodos = () => {
 }
 
 const getTodoById = id => {
-  return Todo.findById(id)
+  /* El metodo populate debe relacionarse con el nombre del campo con el id del _
+  documento que se quiere anexar
+  */
+  return Todo.findById(id).populate('userId', {
+    username: 1,
+    email: 1,
+    createdAt: 1
+  })
 }
 
 const addNewTodo = todo => {

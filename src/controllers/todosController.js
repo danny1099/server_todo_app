@@ -1,4 +1,5 @@
 const todosServices = require('../services/todosServices')
+const User = require('../models/User')
 
 const getAllTodosController = (req, res, next) => {
   todosServices
@@ -27,21 +28,26 @@ const getTodoByIdController = (req, res, next) => {
     .catch(err => next(err))
 }
 
-const addNewTodoController = (req, res, next) => {
+const addNewTodoController = async (req, res, next) => {
   const todo = req.body
 
   if (!todo || !todo.content) {
     return res.status(400).send('No es posible crear la tarea sin el contenido')
   }
 
+  const user = await User.findById(todo.userId)
+
   /* Llama al servicio para crear la nueva tarea */
   todosServices
     .addNewTodo(todo)
     .then(todo => {
-      res
-        .status(201)
-        .json(todo)
-        .end()
+      user.notes = user.notes.concat(todo._id)
+      user.save().then(
+        res
+          .status(201)
+          .json(todo)
+          .end()
+      )
     })
     .catch(err => next(err))
 }
