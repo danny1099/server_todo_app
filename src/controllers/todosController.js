@@ -30,12 +30,13 @@ const getTodoByIdController = (req, res, next) => {
 
 const addNewTodoController = async (req, res, next) => {
   const todo = req.body
+  const userId = req.userId
 
   if (!todo || !todo.content) {
     return res.status(400).send('No es posible crear la tarea sin el contenido')
   }
 
-  const user = await User.findById(todo.userId)
+  const user = await User.findById(userId)
 
   /* Llama al servicio para crear la nueva tarea */
   todosServices

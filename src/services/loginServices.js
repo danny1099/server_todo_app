@@ -18,13 +18,13 @@ const loginUserByPassword = async data => {
   /* Se crea el objeto que se enviara con el token */
   const infoByUser = {
     username: user.username,
-    id: user._id
+    _id: user._id
   }
 
   const tokenForUser = jwt.sign(infoByUser, SECRET_APP_JWT)
 
   /* Si la validación para la comparación devuelve los datos del usuario */
-  return { username: user.username, token: tokenForUser }
+  return { ...infoByUser, token: tokenForUser }
 }
 
 module.exports = { loginUserByPassword }
